@@ -1,35 +1,36 @@
-{
-  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "organizeImports": {
-    "enabled": false
+/**
+ * Biome configuration file.
+ * Using a shared ignore array for both formatter and linter helps
+ * eliminate duplication and simplifies updating the ignore paths.
+ */
+const commonIgnore = [
+  "src/abstract-leveldown.d.ts",
+  "src/rocksdb.d.ts",
+  "packages/core/src/protobufs/generated/*",
+  "packages/hub-nodejs/src/generated/*",
+  "packages/hub-web/src/generated/*"
+];
+
+module.exports = {
+  $schema: "./node_modules/@biomejs/biome/configuration_schema.json",
+  organizeImports: {
+    enabled: false,
   },
-  "formatter": {
-    "enabled": true,
-    "indentSize": 2,
-    "indentStyle": "space",
-    "lineWidth": 120,
-    "ignore": [
-      "src/abstract-leveldown.d.ts",
-      "src/rocksdb.d.ts",
-      "packages/core/src/protobufs/generated/*",
-      "packages/hub-nodejs/src/generated/*",
-      "packages/hub-web/src/generated/*"
-    ]
+  formatter: {
+    enabled: true,
+    indentSize: 2,
+    indentStyle: "space",
+    lineWidth: 120,
+    ignore: commonIgnore,
   },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "complexity": {
-        "useLiteralKeys": "off"
-      }
+  linter: {
+    enabled: true,
+    rules: {
+      recommended: true,
+      complexity: {
+        useLiteralKeys: "off",
+      },
     },
-    "ignore": [
-      "src/abstract-leveldown.d.ts",
-      "src/rocksdb.d.ts",
-      "packages/core/src/protobufs/generated/*",
-      "packages/hub-nodejs/src/generated/*",
-      "packages/hub-web/src/generated/*"
-    ]
-  }
-}
+    ignore: commonIgnore,
+  },
+};
